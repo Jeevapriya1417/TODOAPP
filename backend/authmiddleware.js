@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 
 //create key...
-const jwt_secret = 'secret_key_1417'
+const jwt_secret = process.env.JWT_SECRET || 'secret_key_1417';
 
 // authmiddleware.js
 const verifytoken = (req, res, next) => {
