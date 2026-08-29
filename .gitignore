@@ -1,0 +1,11 @@
+# Node modules & build folders
+node_modules/
+dist/
+build/
+
+# Environment secrets (keeps backend DB & JWT keys safe)
+.env
+.env.*
+
+# System files
+.DS_Store
