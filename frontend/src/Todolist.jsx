@@ -13,7 +13,7 @@ const Todolist = ({ refreshTrigger, reloadList }) => {
     }
 
     try {
-      const getdata = await fetch('http://localhost:5000/getdata', {
+      const getdata = await fetch('https://todo-backend-itgo.onrender.com/getdata', {
         headers: {
           'Authorization': `Bearer ${token}` 
         }

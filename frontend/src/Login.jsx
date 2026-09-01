@@ -8,35 +8,47 @@ const Login = () => {
   const [data, setdata] = useState({ email: '', password: '' })
   const navigate = useNavigate() 
 
-  async function sendLoginData(e) {
-    e.preventDefault()
+  // Login.jsx
+async function sendLoginData(e) {
+  e.preventDefault()
+  try {
+    const response = await fetch('https://todo-backend-itgo.onrender.com/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+
+    // 1. Read response body ONCE as text
+    const textData = await response.text()
+    
+    // 2. Parse text as JSON if possible
+    let result
     try {
-      const response = await fetch('http://localhost:5000/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      })
-
-      if (!response.ok) {
-        return console.log('Error Posting Data')
-      }
-
-      const result = await response.json()
-      console.log('Login Response:', result)
-
-      // 🔑 FIX: Read from result.token instead of data.token!
-      if (result.token) {
-        localStorage.setItem('token', result.token)
-        setdata({ email: '', password: '' })
-        navigate('/todos') 
-      } else {
-        console.log('Token missing in backend response:', result)
-      }
-
-    } catch (e) {
-      console.log('Server error. Please try again later:', e)
+      result = JSON.parse(textData)
+    } catch {
+      result = textData
     }
+
+    // 3. Handle HTTP errors (like 400 Bad Request)
+    if (!response.ok) {
+      console.log('Backend Error:', result)
+      alert(typeof result === 'string' ? result : result.message || 'Login failed')
+      return
+    }
+
+    // 4. Handle Successful Login
+    if (result.token) {
+      localStorage.setItem('token', result.token)
+      setdata({ email: '', password: '' })
+      navigate('/todos')
+    } else {
+      console.log('Token missing in backend response:', result)
+    }
+
+  } catch (e) {
+    console.log('Server error:', e)
   }
+}
 
   const handlechange = (e) => {
     setdata({ ...data, [e.target.name]: e.target.value })

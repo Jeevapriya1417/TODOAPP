@@ -16,7 +16,7 @@ const Todo = ({ fetchfunc }) => {
     }
 
     try {
-      const postdata = await fetch('http://localhost:5000/postdata', {
+      const postdata = await fetch('https://todo-backend-itgo.onrender.com/postdata', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ const Todo = ({ fetchfunc }) => {
       }
 
       const data = await postdata.json()
-      console.log('Task created:', data)
+      console.log('Task created')
 
       settask('')
       fetchfunc() // Triggers refresh in parent

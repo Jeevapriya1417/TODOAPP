@@ -13,7 +13,7 @@ const TodoItem = ({ item, fetchfunc }) => {
   async function saveUpdatedData(id) {
     const token = getToken()
     try {
-      const putdata = await fetch(`http://localhost:5000/putdata/${id}`, {
+      const putdata = await fetch(`https://todo-backend-itgo.onrender.com/putdata/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ const TodoItem = ({ item, fetchfunc }) => {
   async function toggleComplete() {
     const token = getToken()
     try {
-      const response = await fetch(`http://localhost:5000/putdata/${item._id}`, {
+      const response = await fetch(`https://todo-backend-itgo.onrender.com/putdata/${item._id}`, {
         method: 'PUT',
         headers: { 
           'Content-Type': 'application/json', // 🔑 Added Content-Type
@@ -65,7 +65,7 @@ const TodoItem = ({ item, fetchfunc }) => {
   async function deleteData(id) {
     const token = getToken()
     try {
-      const response = await fetch(`http://localhost:5000/deldata/${id}`, { 
+      const response = await fetch(`https://todo-backend-itgo.onrender.com/deldata/${id}`, { 
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

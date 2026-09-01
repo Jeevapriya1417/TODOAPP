@@ -15,7 +15,7 @@ const RegisterPg = () => {
   const postdatas = async (e) => {
     e.preventDefault()
     try {
-      const response = await fetch('http://localhost:5000/postuser', {
+      const response = await fetch('https://todo-backend-itgo.onrender.com/postuser', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(datas)
